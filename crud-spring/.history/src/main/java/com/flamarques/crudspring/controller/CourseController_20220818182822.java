@@ -35,11 +35,11 @@ public class CourseController {
   @ResponseStatus(code = HttpStatus.CREATED)
   public Course create(@RequestBody Course course) {
     // System.out.println(course.getName()); // mapeamento do angular para o spring
+    return courseRepository.save(course);
+
     // return ResponseEntity
     // .status(HttpStatus.CREATED)
     // .body(courseRepository.save(course));
-
-    return courseRepository.save(course);
   }
 
 }
