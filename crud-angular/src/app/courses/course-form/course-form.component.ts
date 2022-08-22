@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
@@ -12,18 +12,22 @@ import { Location } from '@angular/common';
 })
 export class CourseFormComponent implements OnInit {
 
-  form: FormGroup;
+  form = this.formBuilder.group({
+    name: [''],
+    category: [''],
+    // name: new FormControl('', { nonNullable: true }),
+    // name: ['',[Validators.required]],
+    // name: new FormControl<string | null>(null),
+    // category: [null]
+  });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private service: CoursesService,
     private snackBar: MatSnackBar,
     private location: Location
   ) {
-    this.form = this.formBuilder.group({
-      name: [null],
-      category: [null]
-    });
+    // this.form
    }
 
   ngOnInit(): void {
